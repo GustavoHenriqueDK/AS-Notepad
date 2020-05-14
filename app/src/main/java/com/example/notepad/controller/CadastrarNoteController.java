@@ -1,6 +1,7 @@
 package com.example.notepad.controller;
 
 import android.widget.EditText;
+import android.widget.Switch;
 
 public class CadastrarNoteController {
 
@@ -18,4 +19,17 @@ public class CadastrarNoteController {
         return true;
     }
 
+    public boolean switchDeSairPressionado(Switch mSwitch) {
+        if (mSwitch.isChecked()) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean switchDeLimparCampoPressionado(Switch mSwitch) {
+        if (mSwitch.isChecked()) {
+            return true;
+        }
+        return false;
+    }
 }

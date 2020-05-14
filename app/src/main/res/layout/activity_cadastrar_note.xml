@@ -17,7 +17,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.163">
+        app:layout_constraintVertical_bias="0.552">
 
         <EditText
             android:id="@+id/editTextAddNote"
@@ -48,7 +48,39 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.887" />
+        app:layout_constraintVertical_bias="0.972" />
+
+    <Switch
+        android:id="@+id/switchSairAutomaticamente"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:text="Sair automaticamente "
+        android:textSize="16dp"
+        android:thumbTint="@color/colorPrimary"
+        android:trackTint="@color/colorPrimary"
+        app:layout_constraintBottom_toTopOf="@+id/TextInputAddNote"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.101"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.205" />
+
+    <Switch
+        android:id="@+id/switchLimparCampo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="false"
+        android:text="Limpar campo após salvar"
+        android:textSize="16dp"
+        android:thumbTint="@color/colorPrimary"
+        android:trackTint="@color/colorPrimary"
+        app:layout_constraintBottom_toTopOf="@+id/TextInputAddNote"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.121"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.82" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,14 +10,19 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.example.notepad.R;
 import com.example.notepad.controller.CadastrarNoteController;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CadastrarNoteActivity extends AppCompatActivity {
 
     private EditText editText;
+    private List<String> notePad;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,18 +32,33 @@ public class CadastrarNoteActivity extends AppCompatActivity {
         setTitle("Insira uma anotação!");
         findViews();
 
+        notePad = new ArrayList<>();
+
         cliqueDoBotaoDeSalvar();
 
     }
 
     private void cliqueDoBotaoDeSalvar() {
         Button button = findViewById(R.id.buttonCadastrar);
+        final Switch mSwitchSair = findViewById(R.id.switchSairAutomaticamente);
+        final Switch mSwitchLimparCampo = findViewById(R.id.switchLimparCampo);
         final CadastrarNoteController cadastrarNoteController = new CadastrarNoteController();
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (cadastrarNoteController.editTextNaoEstaVazio(editText)) {
-                    
+
+                    notePad.add(editText.getText().toString());
+
+                    if (cadastrarNoteController.switchDeSairPressionado(mSwitchSair)) {
+                        finish();
+                    }
+
+                    if (cadastrarNoteController.switchDeLimparCampoPressionado(mSwitchLimparCampo)) {
+                        editText.setText("");
+                    }
+
                 } else {
                     Toast.makeText(CadastrarNoteActivity.this, "O campo não pode estar vazio", Toast.LENGTH_SHORT).show();
                 }
