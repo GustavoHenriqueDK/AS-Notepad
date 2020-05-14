@@ -7,12 +7,17 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.notepad.R;
 import com.example.notepad.controller.CadastrarNoteController;
 
 public class CadastrarNoteActivity extends AppCompatActivity {
+
+    private EditText editText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,12 +25,29 @@ public class CadastrarNoteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cadastrar_note);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle("Insira uma anotação!");
+        findViews();
 
+        cliqueDoBotaoDeSalvar();
+
+    }
+
+    private void cliqueDoBotaoDeSalvar() {
+        Button button = findViewById(R.id.buttonCadastrar);
+        final CadastrarNoteController cadastrarNoteController = new CadastrarNoteController();
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (cadastrarNoteController.editTextNaoEstaVazio(editText)) {
+                    
+                } else {
+                    Toast.makeText(CadastrarNoteActivity.this, "O campo não pode estar vazio", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     private void defineAlertDialogDeEditText() {
         CadastrarNoteController cadastrarNoteController = new CadastrarNoteController();
-        EditText editText = findViewById(R.id.editTextAddNote);
 
         if (cadastrarNoteController.editTextNoteTemNCaracteres(100, editText)) {
 
@@ -48,6 +70,10 @@ public class CadastrarNoteActivity extends AppCompatActivity {
             finish();
         }
 
+    }
+
+    private void findViews() {
+        editText = findViewById(R.id.editTextAddNote);
     }
 
     @Override

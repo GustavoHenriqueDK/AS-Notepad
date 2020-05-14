@@ -37,7 +37,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnCadastrar"
+        android:id="@+id/buttonCadastrar"
         style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
         android:layout_width="300dp"
         android:layout_height="60dp"

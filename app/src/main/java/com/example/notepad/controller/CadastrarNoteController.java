@@ -10,4 +10,12 @@ public class CadastrarNoteController {
         }
         return false;
     }
+
+    public boolean editTextNaoEstaVazio(EditText editTextNote) {
+        if (editTextNote.getText().toString().trim().equals("")) {
+            return false;
+        }
+        return true;
+    }
+
 }
