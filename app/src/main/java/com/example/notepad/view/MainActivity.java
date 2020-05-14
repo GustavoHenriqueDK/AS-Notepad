@@ -34,8 +34,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setaAdapterRecyclerView() {
-
-
         final RecyclerAdapter recyclerAdapter = new RecyclerAdapter(notePad, context);
         recyclerView = findViewById(R.id.recyclerView);
 
@@ -44,6 +42,14 @@ public class MainActivity extends AppCompatActivity {
         notePad.add("Fazer o almoço");
         notePad.add("Arrumar o guarda-roupas");
 
+        setaSwipeDeDeletar(notePad, recyclerAdapter, recyclerView);
+
+        recyclerView.setAdapter(recyclerAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerAdapter.notifyDataSetChanged();
+    }
+
+    private void setaSwipeDeDeletar(final List<String> notePad, final RecyclerAdapter recyclerAdapter, RecyclerView recyclerView) {
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT) {
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
@@ -57,13 +63,6 @@ public class MainActivity extends AppCompatActivity {
             }
             //Método que adapta a lista após ser modificada.
         }).attachToRecyclerView(recyclerView);
-
-
-        recyclerView.setAdapter(recyclerAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerAdapter.notifyDataSetChanged();
     }
-
-
 
 }
