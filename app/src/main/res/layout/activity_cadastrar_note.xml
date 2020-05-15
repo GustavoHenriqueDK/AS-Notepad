@@ -10,14 +10,14 @@
         android:id="@+id/TextInputAddNote"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="350dp"
-        android:layout_height="450dp"
+        android:layout_height="400dp"
         android:visibility="visible"
         app:errorEnabled="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.552">
+        app:layout_constraintVertical_bias="0.558">
 
         <EditText
             android:id="@+id/editTextAddNote"
@@ -40,7 +40,7 @@
         android:id="@+id/buttonCadastrar"
         style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
         android:layout_width="300dp"
-        android:layout_height="60dp"
+        android:layout_height="wrap_content"
         android:text="SALVAR"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
         app:backgroundTint="@color/colorPrimary"
@@ -48,39 +48,39 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.972" />
+        app:layout_constraintVertical_bias="0.939" />
 
     <Switch
         android:id="@+id/switchSairAutomaticamente"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:checked="true"
-        android:text="Sair automaticamente "
+        android:text="Sair automaticamente             "
         android:textSize="16dp"
         android:thumbTint="@color/colorPrimary"
         android:trackTint="@color/colorPrimary"
         app:layout_constraintBottom_toTopOf="@+id/TextInputAddNote"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.101"
+        app:layout_constraintHorizontal_bias="0.093"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.205" />
+        app:layout_constraintVertical_bias="0.26" />
 
     <Switch
         android:id="@+id/switchLimparCampo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:checked="false"
-        android:text="Limpar campo após salvar"
+        android:text="Limpar campo após salvar     "
         android:textSize="16dp"
         android:thumbTint="@color/colorPrimary"
         android:trackTint="@color/colorPrimary"
-        app:layout_constraintBottom_toTopOf="@+id/TextInputAddNote"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.121"
+        app:layout_constraintHorizontal_bias="0.098"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.82" />
+        app:layout_constraintVertical_bias="0.123" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

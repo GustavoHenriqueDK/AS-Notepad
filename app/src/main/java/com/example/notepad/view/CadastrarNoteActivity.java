@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -22,7 +23,7 @@ import java.util.List;
 public class CadastrarNoteActivity extends AppCompatActivity {
 
     private EditText editText;
-    private List<String> notePad;
+    private List<String> listaDeNotes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +33,7 @@ public class CadastrarNoteActivity extends AppCompatActivity {
         setTitle("Insira uma anotação!");
         findViews();
 
-        notePad = new ArrayList<>();
+        listaDeNotes = new ArrayList<>();
 
         cliqueDoBotaoDeSalvar();
 
@@ -42,6 +43,7 @@ public class CadastrarNoteActivity extends AppCompatActivity {
         Button button = findViewById(R.id.buttonCadastrar);
         final Switch mSwitchSair = findViewById(R.id.switchSairAutomaticamente);
         final Switch mSwitchLimparCampo = findViewById(R.id.switchLimparCampo);
+
         final CadastrarNoteController cadastrarNoteController = new CadastrarNoteController();
 
         button.setOnClickListener(new View.OnClickListener() {
@@ -49,9 +51,13 @@ public class CadastrarNoteActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (cadastrarNoteController.editTextNaoEstaVazio(editText)) {
 
-                    notePad.add(editText.getText().toString());
+                    //TODO: SALVAR OPÇÃO DO SWITCH NO DB
 
-                    if (cadastrarNoteController.switchDeSairPressionado(mSwitchSair)) {
+                    cadastrarNoteController.adicionaNote(listaDeNotes, editText.getText().toString());
+
+                    Toast.makeText(CadastrarNoteActivity.this, "Nota salva", Toast.LENGTH_SHORT).show();
+
+                    if (cadastrarNoteController.switchDeSaiDaTelarPressionado(mSwitchSair)) {
                         finish();
                     }
 

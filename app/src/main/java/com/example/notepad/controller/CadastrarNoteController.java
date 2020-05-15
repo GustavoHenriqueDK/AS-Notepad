@@ -3,6 +3,8 @@ package com.example.notepad.controller;
 import android.widget.EditText;
 import android.widget.Switch;
 
+import java.util.List;
+
 public class CadastrarNoteController {
 
     public boolean editTextNoteTemNCaracteres(int tamanhoDeCaracteresEditText, EditText editTextNote) {
@@ -19,7 +21,7 @@ public class CadastrarNoteController {
         return true;
     }
 
-    public boolean switchDeSairPressionado(Switch mSwitch) {
+    public boolean switchDeSaiDaTelarPressionado(Switch mSwitch) {
         if (mSwitch.isChecked()) {
             return true;
         }
@@ -32,4 +34,13 @@ public class CadastrarNoteController {
         }
         return false;
     }
+
+    public void adicionaNote(List<String> listaDeNotes, String itemASerAdicionado) {
+        listaDeNotes.add(itemASerAdicionado);
+    }
+
+    public List<String> retornaListaDeNotes(List<String> listaDeNotes) {
+        return listaDeNotes;
+    }
 }
+
