@@ -9,9 +9,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.example.notepad.R;
+import com.example.notepad.controller.CadastrarNoteController;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -19,9 +21,10 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private List<String> notePad;
+    private static List<String> listaDeNotes = new ArrayList<>();
     private Context context;
     private RecyclerView recyclerView;
+    private CadastrarNoteController cadastrarNoteController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,26 +32,31 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         setTitle("Faça suas anotações!");
 
-        notePad = new ArrayList<>();
-
         setaAdapterRecyclerView();
         floatingActionButtonCadastrarNote();
 
     }
 
     private void setaAdapterRecyclerView() {
-        final RecyclerAdapter recyclerAdapter = new RecyclerAdapter(notePad, context);
+        final RecyclerAdapter recyclerAdapter = new RecyclerAdapter(listaDeNotes, context);
         recyclerView = findViewById(R.id.recyclerView);
 
-        notePad.add("Ser bilionário");
-        notePad.add("Colocar o lixo pra fora");
-        notePad.add("Fazer o almoço");
-        notePad.add("Arrumar o guarda-roupas");
-
-        setaSwipeDeDeletar(notePad, recyclerAdapter, recyclerView);
+        setaSwipeDeDeletar(listaDeNotes, recyclerAdapter, recyclerView);
 
         recyclerView.setAdapter(recyclerAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        RecyclerAdapter recyclerAdapter = new RecyclerAdapter(listaDeNotes, context);
+
+        cadastrarNoteController = new CadastrarNoteController(context);
+
+        Log.e("retorno na main", String.valueOf(cadastrarNoteController.getListaDeNotes()));
+
         recyclerAdapter.notifyDataSetChanged();
     }
 

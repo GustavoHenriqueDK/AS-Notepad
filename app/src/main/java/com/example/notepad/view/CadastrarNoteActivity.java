@@ -4,7 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -23,7 +25,9 @@ import java.util.List;
 public class CadastrarNoteActivity extends AppCompatActivity {
 
     private EditText editText;
-    private List<String> listaDeNotes;
+    private List<String> listaDeNotes = new ArrayList<>();
+    private Context context;
+    private CadastrarNoteController cadastrarNoteController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +37,7 @@ public class CadastrarNoteActivity extends AppCompatActivity {
         setTitle("Insira uma anotação!");
         findViews();
 
-        listaDeNotes = new ArrayList<>();
+        cadastrarNoteController = new CadastrarNoteController(context);
 
         cliqueDoBotaoDeSalvar();
 
@@ -44,8 +48,6 @@ public class CadastrarNoteActivity extends AppCompatActivity {
         final Switch mSwitchSair = findViewById(R.id.switchSairAutomaticamente);
         final Switch mSwitchLimparCampo = findViewById(R.id.switchLimparCampo);
 
-        final CadastrarNoteController cadastrarNoteController = new CadastrarNoteController();
-
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,7 +55,8 @@ public class CadastrarNoteActivity extends AppCompatActivity {
 
                     //TODO: SALVAR OPÇÃO DO SWITCH NO DB
 
-                    cadastrarNoteController.adicionaNote(listaDeNotes, editText.getText().toString());
+                    cadastrarNoteController.adicionaNote(editText.getText().toString());
+                    Log.e("item adicionado", String.valueOf(cadastrarNoteController.getListaDeNotes()));
 
                     Toast.makeText(CadastrarNoteActivity.this, "Nota salva", Toast.LENGTH_SHORT).show();
 
@@ -73,7 +76,7 @@ public class CadastrarNoteActivity extends AppCompatActivity {
     }
 
     private void defineAlertDialogDeEditText() {
-        CadastrarNoteController cadastrarNoteController = new CadastrarNoteController();
+        CadastrarNoteController cadastrarNoteController = new CadastrarNoteController(context);
 
         if (cadastrarNoteController.editTextNoteTemNCaracteres(100, editText)) {
 
