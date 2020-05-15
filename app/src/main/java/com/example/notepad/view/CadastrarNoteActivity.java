@@ -25,7 +25,6 @@ import java.util.List;
 public class CadastrarNoteActivity extends AppCompatActivity {
 
     private EditText editText;
-    private List<String> listaDeNotes = new ArrayList<>();
     private Context context;
     private CadastrarNoteController cadastrarNoteController;
 

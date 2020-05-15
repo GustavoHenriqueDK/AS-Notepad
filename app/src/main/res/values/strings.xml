@@ -3,4 +3,5 @@
     <string name="alertDialogMensagem">Tem certeza que deseja sair?</string>
     <string name="alertDialogSim">Sim</string>
     <string name="alertDialogNao">Não</string>
+    <string name="alertDialogMensagemExcluir">Tem certeza que deseja excluir todas as notas?</string>
 </resources>
