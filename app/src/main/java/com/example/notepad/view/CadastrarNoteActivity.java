@@ -56,6 +56,7 @@ public class CadastrarNoteActivity extends AppCompatActivity {
                     //TODO: SALVAR OPÇÃO DO SWITCH NO DB
 
                     cadastrarNoteController.adicionaNote(editText.getText().toString());
+
                     Log.e("item adicionado", String.valueOf(cadastrarNoteController.getListaDeNotes()));
 
                     Toast.makeText(CadastrarNoteActivity.this, "Nota salva", Toast.LENGTH_SHORT).show();

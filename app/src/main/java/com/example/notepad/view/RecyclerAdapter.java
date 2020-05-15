@@ -11,11 +11,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.notepad.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ListaViewHolder> {
 
-    List<String> listaDeNotas;
+    private static List<String> listaDeNotas = new ArrayList<>();
     Context context;
 
     public RecyclerAdapter(List<String> listaDeNotas, Context context) {

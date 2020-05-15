@@ -10,7 +10,7 @@ import java.util.List;
 
 public class CadastrarNoteController {
 
-    private final static List<String> listaDeNotes = new ArrayList<>();
+    private static List<String> listaDeNotes = new ArrayList<>();
     private Context context;
 
     public CadastrarNoteController (Context context) {

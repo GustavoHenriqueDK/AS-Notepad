@@ -21,10 +21,11 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static List<String> listaDeNotes = new ArrayList<>();
+    private static final List<String> listNotePad = new ArrayList<>();
     private Context context;
     private RecyclerView recyclerView;
     private CadastrarNoteController cadastrarNoteController;
+    private static RecyclerAdapter recyclerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,16 +33,21 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         setTitle("Faça suas anotações!");
 
+        cadastrarNoteController = new CadastrarNoteController(context);
+
         setaAdapterRecyclerView();
         floatingActionButtonCadastrarNote();
 
     }
 
     private void setaAdapterRecyclerView() {
-        final RecyclerAdapter recyclerAdapter = new RecyclerAdapter(listaDeNotes, context);
+        recyclerAdapter = new RecyclerAdapter(cadastrarNoteController.getListaDeNotes(), context);
         recyclerView = findViewById(R.id.recyclerView);
 
-        setaSwipeDeDeletar(listaDeNotes, recyclerAdapter, recyclerView);
+        setaSwipeDeDeletar(cadastrarNoteController.getListaDeNotes(), recyclerAdapter, recyclerView);
+
+        cadastrarNoteController.getListaDeNotes().add("bla");
+        cadastrarNoteController.getListaDeNotes().add("bla");
 
         recyclerView.setAdapter(recyclerAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -51,9 +57,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        RecyclerAdapter recyclerAdapter = new RecyclerAdapter(listaDeNotes, context);
 
-        cadastrarNoteController = new CadastrarNoteController(context);
+        RecyclerAdapter recyclerAdapter = new RecyclerAdapter(cadastrarNoteController.getListaDeNotes(), context);
 
         Log.e("retorno na main", String.valueOf(cadastrarNoteController.getListaDeNotes()));
 
