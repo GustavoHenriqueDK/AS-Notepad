@@ -47,8 +47,14 @@ public abstract class mRoomDatabase extends androidx.room.RoomDatabase {
             databaseWriteExecutor.execute(() -> {
 
                 ConsultasDAO consultasDAO = INSTANCE.consultasDAO();
+
                 Notepad notepad = new Notepad("bla");
+                Notepad notepad1 = new Notepad("ble");
+                Notepad notepad2 = new Notepad("bli");
+
                 consultasDAO.insertDAO(notepad);
+                consultasDAO.insertDAO(notepad1);
+                consultasDAO.insertDAO(notepad2);
 
             });
         }

@@ -14,7 +14,7 @@ public class MainActivityController {
             textview.setText("Está na hora de anotar coisas interessantes!");
         }
         if (num == 2) {
-            textview.setText("Aww, nada anotado! Que bom, não?");
+            textview.setText("Aww, nada anotado! Que ruim, não?");
         }
         if (num == 3) {
             textview.setText("Nada por aqui... Está tão vazio...");

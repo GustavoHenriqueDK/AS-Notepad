@@ -24,7 +24,7 @@ public interface ConsultasDAO {
 
     //Ordenando a busca do cliente no banco em ordem alfabética;
   //  @Query("SELECT * FROM table_cliente ORDER BY anotacaoRealizada COLLATE NOCASE ASC")
-    @Query("SELECT * FROM table_cliente")
+    @Query("SELECT * FROM table_cliente ORDER BY anotacaoRealizada COLLATE NOCASE ASC")
     List<Notepad> getNotepad();
 
 }

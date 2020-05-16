@@ -1,15 +1,13 @@
 package com.example.notepad.database.asynctask;
 
-import android.content.Context;
 import android.os.AsyncTask;
+import android.provider.ContactsContract;
 
 import com.example.notepad.database.dao.ConsultasDAO;
-import com.example.notepad.database.dao.mRoomDatabase;
 import com.example.notepad.model.Notepad;
-
 import java.util.List;
 
-public class AsyncTaskGet extends AsyncTask<Void, Integer, List<Notepad>> {
+public class  AsyncTaskGet extends AsyncTask<Void, Integer, List<Notepad>> {
 
     private ConsultasDAO consultasDAO;
     private QuandoBuscarNotes quandoBuscarNotes;

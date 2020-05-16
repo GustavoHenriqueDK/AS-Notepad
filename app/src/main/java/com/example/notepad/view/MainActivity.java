@@ -3,6 +3,7 @@ package com.example.notepad.view;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,6 +27,7 @@ import android.widget.Toast;
 import com.example.notepad.R;
 import com.example.notepad.controller.CadastrarNoteController;
 import com.example.notepad.controller.MainActivityController;
+import com.example.notepad.database.asynctask.AsyncTaskGet;
 import com.example.notepad.model.Notepad;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -39,11 +41,12 @@ public class MainActivity extends AppCompatActivity {
     private CadastrarNoteController cadastrarNoteController;
     private MainActivityController mainActivityController;
     private static RecyclerAdapter recyclerAdapter;
+    private List<Notepad> notepadList = new ArrayList<>();
 
     private ConstraintLayout constraintLayoutLista;
     private ConstraintLayout constraintLayoutTextView;
-    TextView textView;
-    ImageView imageView;
+    private TextView textView;
+    private ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +60,6 @@ public class MainActivity extends AppCompatActivity {
 
         setaAdapterRecyclerView();
         floatingActionButtonCadastrarNote();
-
 
     }
 
@@ -83,31 +85,38 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setaAdapterRecyclerView() {
-        recyclerAdapter = new RecyclerAdapter(cadastrarNoteController.getListaDeNotes(), context);
+        recyclerAdapter = new RecyclerAdapter(notepadList, context);
         recyclerView = findViewById(R.id.recyclerView);
 
-        setaSwipeDeDeletar(cadastrarNoteController.getListaDeNotes(), recyclerAdapter, recyclerView);
+        //setaSwipeDeDeletar(cadastrarNoteController.getListaDeNotes(), recyclerAdapter, recyclerView);
 
-        Notepad notepad = new Notepad();
-        notepad.setAnotacaoRealizada("blablabla");
+        recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+        recyclerView.addItemDecoration(new DividerItemDecoration(MainActivity.this,
+                DividerItemDecoration.VERTICAL));
 
-        cadastrarNoteController.getListaDeNotes().add(notepad);
-
+     //   recyclerAdapter.notifyDataSetChanged();
         recyclerView.setAdapter(recyclerAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerAdapter.notifyDataSetChanged();
-
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        recyclerAdapter.notifyDataSetChanged();
+
+        cadastrarNoteController.pegaNoteNoBancoDeDados(new AsyncTaskGet.QuandoBuscarNotes() {
+            @Override
+            public void quandoBuscar(List<Notepad> notepads) {
+
+                notepadList = new ArrayList<>(notepads);
+
+                recyclerAdapter.setNotes(notepadList);
+
+                recyclerAdapter.notifyDataSetChanged();
+                verificaSeListaEstaVazia();
+            }
+        });
 
         //Método chamado no onResume, no método "onOptionsItemSelected" e no método "setaSwipeDeDeletar", logo após os itens
         //terem sido arrastados para o delete e o RecyclerView tenha sido atualizado.
-
-        verificaSeListaEstaVazia();
 
     }
 

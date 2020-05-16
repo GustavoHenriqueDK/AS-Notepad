@@ -1,5 +1,6 @@
 package com.example.notepad.model;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -21,6 +22,11 @@ public class Notepad {
         this.id = id;
     }
 
+    @NonNull
+    @Override
+    public String toString() {
+        return anotacaoRealizada;
+    }
 
     public Notepad(String anotacaoRealizada) {
         this.anotacaoRealizada = anotacaoRealizada;

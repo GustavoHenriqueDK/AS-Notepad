@@ -26,8 +26,6 @@ public class CadastrarNoteController {
     private ConsultasDAO consultasDAO;
 
     public CadastrarNoteController (Context context) {
-        this.context = context;
-
         mRoomDatabase roomDatabase = mRoomDatabase.getDatabase(context);
         consultasDAO = roomDatabase.consultasDAO();
     }

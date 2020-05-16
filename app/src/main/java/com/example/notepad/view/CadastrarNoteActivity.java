@@ -18,6 +18,8 @@ import android.widget.Toast;
 
 import com.example.notepad.R;
 import com.example.notepad.controller.CadastrarNoteController;
+import com.example.notepad.database.asynctask.AsyncTaskSave;
+import com.example.notepad.model.Notepad;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +38,7 @@ public class CadastrarNoteActivity extends AppCompatActivity {
         setTitle("Insira uma anotação!");
         findViews();
 
+        context = CadastrarNoteActivity.this;
         cadastrarNoteController = new CadastrarNoteController(context);
 
         cliqueDoBotaoDeSalvar();
@@ -53,21 +56,28 @@ public class CadastrarNoteActivity extends AppCompatActivity {
                 if (cadastrarNoteController.editTextNaoEstaVazio(editText)) {
 
                     //TODO: SALVAR OPÇÃO DO SWITCH NO DB
+                    //TODO: SEPARAR RESPONSABILIDADES
 
-                    cadastrarNoteController.adicionaNote(editText.getText().toString());
+                    CadastrarNoteController cadastrarNoteControllerDataBase = new CadastrarNoteController(context);
 
-                    Log.e("item adicionado", String.valueOf(cadastrarNoteController.getListaDeNotes()));
+                    Notepad notepad = new Notepad();
+                    notepad.setAnotacaoRealizada(editText.getText().toString());
 
-                    Toast.makeText(CadastrarNoteActivity.this, "Nota salva", Toast.LENGTH_SHORT).show();
+                    cadastrarNoteControllerDataBase.adicionarNoteNoBancoDeDados(notepad, new AsyncTaskSave.QuandoSalvarListener() {
+                        @Override
+                        public void quandoSalvar() {
 
-                    if (cadastrarNoteController.switchDeSaiDaTelarPressionado(mSwitchSair)) {
-                        finish();
-                    }
+                            Toast.makeText(CadastrarNoteActivity.this, "Nota salva", Toast.LENGTH_SHORT).show();
 
-                    if (cadastrarNoteController.switchDeLimparCampoPressionado(mSwitchLimparCampo)) {
-                        editText.setText("");
-                    }
+                            if (cadastrarNoteControllerDataBase.switchDeSaiDaTelarPressionado(mSwitchSair)) {
+                                finish();
+                            }
 
+                            if (cadastrarNoteControllerDataBase.switchDeLimparCampoPressionado(mSwitchLimparCampo)) {
+                                editText.setText("");
+                            }
+                        }
+                    });
                 } else {
                     Toast.makeText(CadastrarNoteActivity.this, "O campo não pode estar vazio", Toast.LENGTH_SHORT).show();
                 }

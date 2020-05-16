@@ -18,8 +18,12 @@ import java.util.List;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ListaViewHolder> {
 
-    private static List<Notepad> listaDeNotas = new ArrayList<>();
-    Context context;
+    private static List<Notepad> listaDeNotas;
+    private Context context;
+
+    public void setNotes(List<Notepad> listaDeNotas) {
+        this.listaDeNotas = listaDeNotas;
+    }
 
     public RecyclerAdapter(List<Notepad> listaDeNotas, Context context) {
         this.listaDeNotas = listaDeNotas;
@@ -52,5 +56,4 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ListaV
             textNote = itemView.findViewById(R.id.textView);
         }
     }
-
 }
