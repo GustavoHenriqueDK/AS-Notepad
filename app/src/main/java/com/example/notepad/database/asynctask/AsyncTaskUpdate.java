@@ -13,7 +13,7 @@ public class AsyncTaskUpdate extends AsyncTask<Void, Integer, Void> {
     private Notepad notepad;
     private QuandoAlterarListener quandoAlterarListener;
     private Context context;
-     
+
     public AsyncTaskUpdate(Notepad notepad, QuandoAlterarListener quandoAlterarListener) {
         this.notepad = notepad;
         this.quandoAlterarListener = quandoAlterarListener;
