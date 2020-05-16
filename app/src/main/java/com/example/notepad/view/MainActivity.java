@@ -25,6 +25,7 @@ import android.widget.Toast;
 
 import com.example.notepad.R;
 import com.example.notepad.controller.CadastrarNoteController;
+import com.example.notepad.controller.MainActivityController;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private Context context;
     private RecyclerView recyclerView;
     private CadastrarNoteController cadastrarNoteController;
+    private MainActivityController mainActivityController;
     private static RecyclerAdapter recyclerAdapter;
 
     private ConstraintLayout constraintLayoutLista;
@@ -59,11 +61,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void verificaSeListaEstaVazia() {
+
+        MainActivityController mainActivityController = new MainActivityController();
+
         if (cadastrarNoteController.listaEstaVazia()) {
             constraintLayoutLista.setVisibility(View.GONE);
             constraintLayoutTextView.setVisibility(View.VISIBLE);
             iniciaAnimacaoDosComponentes();
-            cadastrarNoteController.setaTextoAleatoriamente(textView);
+            mainActivityController.setaTextoAleatoriamente(textView);
         } else {
             constraintLayoutLista.setVisibility(View.VISIBLE);
             constraintLayoutTextView.setVisibility(View.GONE);
@@ -97,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         recyclerAdapter.notifyDataSetChanged();
 
-        //Método chamado no onResume e no método "setaSwipeDeDeletar", logo após os itens
+        //Método chamado no onResume, no método "onOptionsItemSelected" e no método "setaSwipeDeDeletar", logo após os itens
         //terem sido arrastados para o delete e o RecyclerView tenha sido atualizado.
 
         verificaSeListaEstaVazia();
@@ -154,13 +159,36 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.limparTudo:
 
-                //TODO
+                if (cadastrarNoteController.getListaDeNotes().size() > 10) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                    builder.setMessage(R.string.alertDialogMensagemExcluir)
+                            .setPositiveButton(R.string.alertDialogSim, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
 
-                for (int i = 0; i < cadastrarNoteController.getListaDeNotes().size(); i++) {
-                    cadastrarNoteController.getListaDeNotes().remove(i);
+                                    cadastrarNoteController.getListaDeNotes().clear();
+
+                                    recyclerView.getRecycledViewPool().clear();
+                                    recyclerAdapter.notifyDataSetChanged();
+
+                                    verificaSeListaEstaVazia();
+
+                                }
+                            })
+                            .setNegativeButton(R.string.alertDialogNao, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+                                }
+                            });
+
+                    AlertDialog alert11 = builder.create();
+                    alert11.show();
+                } else {
+                    cadastrarNoteController.getListaDeNotes().clear();
                 }
 
                 recyclerAdapter.notifyDataSetChanged();
+                verificaSeListaEstaVazia();
+
                 break;
         }
         return super.onOptionsItemSelected(item);
