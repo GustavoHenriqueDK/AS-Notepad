@@ -26,6 +26,7 @@ import android.widget.Toast;
 import com.example.notepad.R;
 import com.example.notepad.controller.CadastrarNoteController;
 import com.example.notepad.controller.MainActivityController;
+import com.example.notepad.model.Notepad;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -87,9 +88,10 @@ public class MainActivity extends AppCompatActivity {
 
         setaSwipeDeDeletar(cadastrarNoteController.getListaDeNotes(), recyclerAdapter, recyclerView);
 
-        cadastrarNoteController.getListaDeNotes().add("bla");
-        cadastrarNoteController.getListaDeNotes().add("bla");
-        cadastrarNoteController.getListaDeNotes().add("bla");
+        Notepad notepad = new Notepad();
+        notepad.setAnotacaoRealizada("blablabla");
+
+        cadastrarNoteController.getListaDeNotes().add(notepad);
 
         recyclerView.setAdapter(recyclerAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -109,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void setaSwipeDeDeletar(final List<String> notePad, final RecyclerAdapter recyclerAdapter, RecyclerView recyclerView) {
+    private void setaSwipeDeDeletar(final List<Notepad> notePad, final RecyclerAdapter recyclerAdapter, RecyclerView recyclerView) {
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT) {
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {

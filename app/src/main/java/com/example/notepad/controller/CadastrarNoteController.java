@@ -6,13 +6,15 @@ import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.example.notepad.model.Notepad;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 public class CadastrarNoteController {
 
-    private static List<String> listaDeNotes = new ArrayList<>();
+    private static List<Notepad> listaDeNotes = new ArrayList<>();
     private Context context;
 
     public CadastrarNoteController (Context context) {
@@ -49,12 +51,13 @@ public class CadastrarNoteController {
 
     //Save and return
     public void adicionaNote(String itemASerAdicionado) {
-        listaDeNotes.add(itemASerAdicionado);
+
+        Notepad notepad = new Notepad();
+        notepad.setAnotacaoRealizada(itemASerAdicionado);
+
+        listaDeNotes.add(notepad);
     }
 
-    public void removeNote(int position) {
-        listaDeNotes.remove(position);
-    }
 
     public boolean listaEstaVazia() {
         if (listaDeNotes.isEmpty()) {
@@ -63,7 +66,7 @@ public class CadastrarNoteController {
         return false;
     }
 
-    public List<String> getListaDeNotes() {
+    public List<Notepad> getListaDeNotes() {
         return listaDeNotes;
     }
 

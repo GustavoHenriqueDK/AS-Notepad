@@ -11,16 +11,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.notepad.R;
 import com.example.notepad.controller.CadastrarNoteController;
+import com.example.notepad.model.Notepad;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ListaViewHolder> {
 
-    private static List<String> listaDeNotas = new ArrayList<>();
+    private static List<Notepad> listaDeNotas = new ArrayList<>();
     Context context;
 
-    public RecyclerAdapter(List<String> listaDeNotas, Context context) {
+    public RecyclerAdapter(List<Notepad> listaDeNotas, Context context) {
         this.listaDeNotas = listaDeNotas;
         this.context = context;
     }
@@ -34,7 +35,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ListaV
 
     @Override
     public void onBindViewHolder(@NonNull ListaViewHolder holder, int position) {
-        holder.textNote.setText(listaDeNotas.get(position));
+        holder.textNote.setText(listaDeNotas.get(position).getAnotacaoRealizada());
     }
 
     @Override
