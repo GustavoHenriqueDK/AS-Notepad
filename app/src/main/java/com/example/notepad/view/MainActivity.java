@@ -159,36 +159,41 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.limparTudo:
 
-                if (cadastrarNoteController.getListaDeNotes().size() > 10) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                    builder.setMessage(R.string.alertDialogMensagemExcluir)
-                            .setPositiveButton(R.string.alertDialogSim, new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
+                if (cadastrarNoteController.getListaDeNotes().size() >= 1) {
 
-                                    cadastrarNoteController.getListaDeNotes().clear();
+                    if (cadastrarNoteController.getListaDeNotes().size() > 10) {
 
-                                    recyclerView.getRecycledViewPool().clear();
-                                    recyclerAdapter.notifyDataSetChanged();
+                        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                        builder.setMessage(R.string.alertDialogMensagemExcluir)
+                                .setPositiveButton(R.string.alertDialogSim, new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
 
-                                    verificaSeListaEstaVazia();
+                                        cadastrarNoteController.getListaDeNotes().clear();
 
-                                }
-                            })
-                            .setNegativeButton(R.string.alertDialogNao, new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    dialog.cancel();
-                                }
-                            });
+                                        recyclerView.getRecycledViewPool().clear();
+                                        recyclerAdapter.notifyDataSetChanged();
 
-                    AlertDialog alert11 = builder.create();
-                    alert11.show();
+                                        verificaSeListaEstaVazia();
+
+                                    }
+                                })
+                                .setNegativeButton(R.string.alertDialogNao, new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        dialog.cancel();
+                                    }
+                                });
+
+                        AlertDialog alert11 = builder.create();
+                        alert11.show();
+                    } else {
+                        cadastrarNoteController.getListaDeNotes().clear();
+                    }
+
+                    recyclerAdapter.notifyDataSetChanged();
+                    verificaSeListaEstaVazia();
                 } else {
-                    cadastrarNoteController.getListaDeNotes().clear();
+                    Toast.makeText(context, "Tudo limpo!", Toast.LENGTH_SHORT).show();
                 }
-
-                recyclerAdapter.notifyDataSetChanged();
-                verificaSeListaEstaVazia();
-
                 break;
         }
         return super.onOptionsItemSelected(item);
