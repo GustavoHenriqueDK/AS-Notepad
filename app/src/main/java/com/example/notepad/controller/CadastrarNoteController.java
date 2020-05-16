@@ -47,7 +47,6 @@ public class CadastrarNoteController {
         return false;
     }
 
-
     //Save and return
     public void adicionaNote(String itemASerAdicionado) {
         listaDeNotes.add(itemASerAdicionado);

@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.notepad.R;
+import com.example.notepad.controller.CadastrarNoteController;
 
 import java.util.ArrayList;
 import java.util.List;
