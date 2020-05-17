@@ -7,12 +7,14 @@ import com.example.notepad.database.dao.ConsultasDAO;
 import com.example.notepad.database.dao.mRoomDatabase;
 import com.example.notepad.model.Notepad;
 
+import java.util.List;
+
 public class AsyncTaskDelete extends AsyncTask<Void, Integer, Void> {
 
-    private ConsultasDAO consultasDAO;
-    private Notepad notepad;
-    private QuandoDeletarListener quandoDeletarListener;
-    private Context context;
+    public ConsultasDAO consultasDAO;
+    public Notepad notepad;
+    public QuandoDeletarListener quandoDeletarListener;
+    Context context;
 
     public AsyncTaskDelete(Notepad notepad, QuandoDeletarListener quandoDeletarListener) {
         this.notepad = notepad;

@@ -23,8 +23,8 @@ public interface ConsultasDAO {
     void updateDAO(Notepad notepad);
 
     //Ordenando a busca do cliente no banco em ordem alfabética;
-  //  @Query("SELECT * FROM table_cliente ORDER BY anotacaoRealizada COLLATE NOCASE ASC")
-    @Query("SELECT * FROM table_cliente ORDER BY anotacaoRealizada COLLATE NOCASE ASC")
+  //  @Query("SELECT * FROM table_cliente")
+    @Query("SELECT * FROM table_cliente")
     List<Notepad> getNotepad();
 
 }

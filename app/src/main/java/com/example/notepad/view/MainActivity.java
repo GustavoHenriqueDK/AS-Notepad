@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     private CadastrarNoteController cadastrarNoteController;
     private MainActivityController mainActivityController;
     private static RecyclerAdapter recyclerAdapter;
-    private List<Notepad> notepadList = new ArrayList<>();
+    public List<Notepad> notepadList = new ArrayList<>();
 
     private ConstraintLayout constraintLayoutLista;
     private ConstraintLayout constraintLayoutTextView;
@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.addItemDecoration(new DividerItemDecoration(MainActivity.this,
                 DividerItemDecoration.VERTICAL));
 
-     //   recyclerAdapter.notifyDataSetChanged();
+        recyclerAdapter.notifyDataSetChanged();
         recyclerView.setAdapter(recyclerAdapter);
     }
 
@@ -111,13 +111,12 @@ public class MainActivity extends AppCompatActivity {
                 recyclerAdapter.setNotes(notepadList);
 
                 recyclerAdapter.notifyDataSetChanged();
-                verificaSeListaEstaVazia();
+
+                //Método chamado no onResume, no método "onOptionsItemSelected" e no método "setaSwipeDeDeletar", logo após os itens
+                //terem sido arrastados para o delete e o RecyclerView tenha sido atualizado.
+               // verificaSeListaEstaVazia();
             }
         });
-
-        //Método chamado no onResume, no método "onOptionsItemSelected" e no método "setaSwipeDeDeletar", logo após os itens
-        //terem sido arrastados para o delete e o RecyclerView tenha sido atualizado.
-
     }
 
     private void setaSwipeDeDeletar(final List<Notepad> notePad, final RecyclerAdapter recyclerAdapter, RecyclerView recyclerView) {
@@ -132,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
                 notePad.remove(viewHolder.getAdapterPosition());
                 recyclerAdapter.notifyDataSetChanged();
 
-                verificaSeListaEstaVazia();
+           //     verificaSeListaEstaVazia();
 
             }
             //Método que adapta a lista após ser modificada.
@@ -184,7 +183,7 @@ public class MainActivity extends AppCompatActivity {
                                         recyclerView.getRecycledViewPool().clear();
                                         recyclerAdapter.notifyDataSetChanged();
 
-                                        verificaSeListaEstaVazia();
+                                     //   verificaSeListaEstaVazia();
 
                                     }
                                 })
@@ -201,7 +200,7 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                     recyclerAdapter.notifyDataSetChanged();
-                    verificaSeListaEstaVazia();
+                  //  verificaSeListaEstaVazia();
                 } else {
                     Toast.makeText(context, "Tudo limpo!", Toast.LENGTH_SHORT).show();
                 }
