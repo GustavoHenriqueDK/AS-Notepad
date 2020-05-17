@@ -58,15 +58,6 @@ public class CadastrarNoteController {
         return false;
     }
 
-    //Save and return
-    public void adicionaNote(String itemASerAdicionado) {
-
-        Notepad notepad = new Notepad();
-        notepad.setAnotacaoRealizada(itemASerAdicionado);
-
-        listaDeNotes.add(notepad);
-    }
-
     public boolean listaEstaVazia() {
         if (listaDeNotes.isEmpty()) {
             return true;

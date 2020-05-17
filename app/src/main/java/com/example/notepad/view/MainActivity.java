@@ -91,8 +91,6 @@ public class MainActivity extends AppCompatActivity {
         //setaSwipeDeDeletar(cadastrarNoteController.getListaDeNotes(), recyclerAdapter, recyclerView);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
-        recyclerView.addItemDecoration(new DividerItemDecoration(MainActivity.this,
-                DividerItemDecoration.VERTICAL));
 
         recyclerAdapter.notifyDataSetChanged();
         recyclerView.setAdapter(recyclerAdapter);
@@ -111,10 +109,6 @@ public class MainActivity extends AppCompatActivity {
                 recyclerAdapter.setNotes(notepadList);
 
                 recyclerAdapter.notifyDataSetChanged();
-
-                //Método chamado no onResume, no método "onOptionsItemSelected" e no método "setaSwipeDeDeletar", logo após os itens
-                //terem sido arrastados para o delete e o RecyclerView tenha sido atualizado.
-               // verificaSeListaEstaVazia();
             }
         });
     }
