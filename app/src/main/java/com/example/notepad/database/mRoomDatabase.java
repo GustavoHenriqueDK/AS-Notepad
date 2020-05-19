@@ -50,7 +50,7 @@ public abstract class mRoomDatabase extends androidx.room.RoomDatabase {
                 ConsultasDAO consultasDAO = INSTANCE.consultasDAO();
 
                 Notepad notepad = new Notepad();
-                notepad.setAnotacaoRealizada("Anote tudo! Desliza para o lado para deletar.");
+                notepad.setAnotacaoRealizada("Anote tuuudo! Arraste para deletar.");
                 consultasDAO.insertDAO(notepad);
 
             });
