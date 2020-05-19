@@ -79,8 +79,8 @@ public class CadastrarNoteController {
         asyncTaskSave.execute();
     }
 
-    public void deletaNoteNoBancoDeDados(Notepad notepad, AsyncTaskDelete.QuandoDeletarListener quandoDeletarListener) {
-        AsyncTaskDelete asyncTaskDelete = new AsyncTaskDelete(notepad, quandoDeletarListener);
+    public void deletaNoteNoBancoDeDados(Notepad notepad) {
+        AsyncTaskDelete asyncTaskDelete = new AsyncTaskDelete(notepad);
         asyncTaskDelete.execute();
     }
 

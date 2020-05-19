@@ -13,12 +13,10 @@ public class AsyncTaskDelete extends AsyncTask<Void, Integer, Void> {
 
     private ConsultasDAO consultasDAO;
     private Notepad notepad;
-    private QuandoDeletarListener quandoDeletarListener;
     private Context context;
 
-    public AsyncTaskDelete(Notepad notepad, QuandoDeletarListener quandoDeletarListener) {
+    public AsyncTaskDelete(Notepad notepad) {
         this.notepad = notepad;
-        this.quandoDeletarListener = quandoDeletarListener;
 
         mRoomDatabase roomDatabase = mRoomDatabase.getDatabase(context);
         consultasDAO = roomDatabase.consultasDAO();
@@ -30,16 +28,4 @@ public class AsyncTaskDelete extends AsyncTask<Void, Integer, Void> {
         consultasDAO.deleteDAO(notepad);
         return null;
     }
-
-    @Override
-    protected void onPostExecute(Void aVoid) {
-        //Interface genérica responsável por aplicar o onPostExecute;
-        quandoDeletarListener.quandoDeletar();
-        super.onPostExecute(aVoid);
-    }
-
-    public interface QuandoDeletarListener {
-        void quandoDeletar();
-    }
-
 }

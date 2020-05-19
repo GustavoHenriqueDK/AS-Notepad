@@ -88,7 +88,6 @@ public class MainActivity extends AppCompatActivity {
         recyclerAdapter = new RecyclerAdapter(notepadList, context);
         recyclerView = findViewById(R.id.recyclerView);
 
-
         recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
 
         recyclerAdapter.notifyDataSetChanged();
@@ -125,12 +124,7 @@ public class MainActivity extends AppCompatActivity {
                 Notepad notepad;
                 notepad = notepadList.remove(viewHolder.getAdapterPosition());
 
-                cadastrarNoteController.deletaNoteNoBancoDeDados(notepad, new AsyncTaskDelete.QuandoDeletarListener() {
-                    @Override
-                    public void quandoDeletar() {
-                        Toast.makeText(context, "deletou", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                cadastrarNoteController.deletaNoteNoBancoDeDados(notepad);
                 recyclerAdapter.notifyDataSetChanged();
                 recyclerView.setAdapter(recyclerAdapter);
             }
