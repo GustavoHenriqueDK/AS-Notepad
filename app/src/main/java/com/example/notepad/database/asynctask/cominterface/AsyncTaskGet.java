@@ -1,4 +1,4 @@
-package com.example.notepad.database.asynctask;
+package com.example.notepad.database.asynctask.cominterface;
 
 import android.os.AsyncTask;
 import android.provider.ContactsContract;
@@ -11,7 +11,6 @@ public class  AsyncTaskGet extends AsyncTask<Void, Integer, List<Notepad>> {
 
     private ConsultasDAO consultasDAO;
     private QuandoBuscarNotes quandoBuscarNotes;
-    private Notepad notepad;
 
     public AsyncTaskGet(ConsultasDAO consultasDAO, QuandoBuscarNotes quandoBuscarNotes) {
         this.consultasDAO = consultasDAO;
@@ -32,5 +31,4 @@ public class  AsyncTaskGet extends AsyncTask<Void, Integer, List<Notepad>> {
     public interface QuandoBuscarNotes {
         void quandoBuscar(List<Notepad> notepads);
     }
-
 }

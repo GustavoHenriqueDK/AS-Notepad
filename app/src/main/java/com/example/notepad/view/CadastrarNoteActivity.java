@@ -6,9 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -18,11 +16,8 @@ import android.widget.Toast;
 
 import com.example.notepad.R;
 import com.example.notepad.controller.CadastrarNoteController;
-import com.example.notepad.database.asynctask.AsyncTaskSave;
+import com.example.notepad.database.asynctask.cominterface.AsyncTaskSave;
 import com.example.notepad.model.Notepad;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class CadastrarNoteActivity extends AppCompatActivity {
 

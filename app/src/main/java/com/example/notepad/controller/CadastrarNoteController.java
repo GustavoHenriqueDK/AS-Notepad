@@ -1,23 +1,19 @@
 package com.example.notepad.controller;
 
 import android.content.Context;
-import android.os.AsyncTask;
-import android.util.Log;
 import android.widget.EditText;
 import android.widget.Switch;
-import android.widget.TextView;
 
-import com.example.notepad.database.asynctask.AsyncTaskDelete;
-import com.example.notepad.database.asynctask.AsyncTaskGet;
-import com.example.notepad.database.asynctask.AsyncTaskSave;
-import com.example.notepad.database.asynctask.AsyncTaskUpdate;
+import com.example.notepad.database.asynctask.cominterface.AsyncTaskDelete;
+import com.example.notepad.database.asynctask.cominterface.AsyncTaskGet;
+import com.example.notepad.database.asynctask.cominterface.AsyncTaskSave;
+import com.example.notepad.database.asynctask.cominterface.AsyncTaskUpdate;
 import com.example.notepad.database.dao.ConsultasDAO;
 import com.example.notepad.database.dao.mRoomDatabase;
 import com.example.notepad.model.Notepad;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class CadastrarNoteController {
 
@@ -87,6 +83,13 @@ public class CadastrarNoteController {
     }
 
     public List<Notepad> pegaNoteNoBancoDeDados(AsyncTaskGet.QuandoBuscarNotes quandoBuscarNotes) {
+        AsyncTaskGet asyncTaskGet = new AsyncTaskGet(consultasDAO, quandoBuscarNotes);
+        asyncTaskGet.execute();
+        return null;
+    }
+
+    //Métodos database sem interface;
+    public List<Notepad> pegaNoteNoBancoDeDadosSemInterface(AsyncTaskGet.QuandoBuscarNotes quandoBuscarNotes) {
         AsyncTaskGet asyncTaskGet = new AsyncTaskGet(consultasDAO, quandoBuscarNotes);
         asyncTaskGet.execute();
         return null;
