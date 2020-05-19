@@ -1,4 +1,4 @@
-package com.example.notepad.database.dao;
+package com.example.notepad.database;
 
 import android.content.Context;
 
@@ -7,6 +7,7 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import com.example.notepad.database.dao.ConsultasDAO;
 import com.example.notepad.model.Notepad;
 
 import java.util.concurrent.ExecutorService;
@@ -49,16 +50,8 @@ public abstract class mRoomDatabase extends androidx.room.RoomDatabase {
                 ConsultasDAO consultasDAO = INSTANCE.consultasDAO();
 
                 Notepad notepad = new Notepad();
-                notepad.setAnotacaoRealizada("bla");
+                notepad.setAnotacaoRealizada("Anote tudo! Desliza para o lado para deletar.");
                 consultasDAO.insertDAO(notepad);
-
-                Notepad notepad1 = new Notepad();
-                notepad1.setAnotacaoRealizada("ble");
-                consultasDAO.insertDAO(notepad1);
-
-                Notepad notepad2 = new Notepad();
-                notepad2.setAnotacaoRealizada("bli");
-                consultasDAO.insertDAO(notepad2);
 
             });
         }

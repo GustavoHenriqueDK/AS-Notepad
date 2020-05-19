@@ -1,19 +1,21 @@
-package com.example.notepad.database.asynctask;
+package com.example.notepad.database.asynctask.seminterface;
 
 import android.content.Context;
 import android.os.AsyncTask;
 
 import com.example.notepad.database.dao.ConsultasDAO;
-import com.example.notepad.database.dao.mRoomDatabase;
+import com.example.notepad.database.mRoomDatabase;
 import com.example.notepad.model.Notepad;
+
+import java.util.List;
 
 public class AsyncTaskDeleteSemInterface extends AsyncTask<Void, Integer, Void> {
 
     private ConsultasDAO consultasDAO;
-    private Notepad notepad;
+    private List<Notepad> notepad;
     private Context context;
 
-    public AsyncTaskDeleteSemInterface(Notepad notepad) {
+    public AsyncTaskDeleteSemInterface(List<Notepad> notepad) {
         this.notepad = notepad;
 
         mRoomDatabase roomDatabase = mRoomDatabase.getDatabase(context);
@@ -23,7 +25,7 @@ public class AsyncTaskDeleteSemInterface extends AsyncTask<Void, Integer, Void> 
     @Override
     protected Void doInBackground(Void... voids) {
         //Método que vai rodar a task em segundo plano.
-        consultasDAO.deleteDAO(notepad);
+        consultasDAO.deleteDAOSemInterface(notepad);
         return null;
     }
 }

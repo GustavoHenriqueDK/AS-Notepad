@@ -3,10 +3,8 @@ package com.example.notepad.database.asynctask.cominterface;
 import android.content.Context;
 import android.os.AsyncTask;
 
-import androidx.room.RoomDatabase;
-
 import com.example.notepad.database.dao.ConsultasDAO;
-import com.example.notepad.database.dao.mRoomDatabase;
+import com.example.notepad.database.mRoomDatabase;
 import com.example.notepad.model.Notepad;
 
 public class AsyncTaskSave extends AsyncTask<Void, Integer, Void> {

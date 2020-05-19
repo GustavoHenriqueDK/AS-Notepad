@@ -4,14 +4,14 @@ import android.content.Context;
 import android.widget.EditText;
 import android.widget.Switch;
 
-import com.example.notepad.database.asynctask.AsyncTaskDeleteSemInterface;
-import com.example.notepad.database.asynctask.AsyncTaskGetSemInterface;
+import com.example.notepad.database.asynctask.seminterface.AsyncTaskDeleteSemInterface;
+import com.example.notepad.database.asynctask.seminterface.AsyncTaskGetSemInterface;
 import com.example.notepad.database.asynctask.cominterface.AsyncTaskDelete;
 import com.example.notepad.database.asynctask.cominterface.AsyncTaskGet;
 import com.example.notepad.database.asynctask.cominterface.AsyncTaskSave;
 import com.example.notepad.database.asynctask.cominterface.AsyncTaskUpdate;
 import com.example.notepad.database.dao.ConsultasDAO;
-import com.example.notepad.database.dao.mRoomDatabase;
+import com.example.notepad.database.mRoomDatabase;
 import com.example.notepad.model.Notepad;
 
 import java.util.ArrayList;
@@ -24,6 +24,11 @@ public class CadastrarNoteController {
     private ConsultasDAO consultasDAO;
 
     public CadastrarNoteController(Context context) {
+        mRoomDatabase roomDatabase = mRoomDatabase.getDatabase(context);
+        consultasDAO = roomDatabase.consultasDAO();
+    }
+
+    public CadastrarNoteController() {
         mRoomDatabase roomDatabase = mRoomDatabase.getDatabase(context);
         consultasDAO = roomDatabase.consultasDAO();
     }
@@ -97,8 +102,8 @@ public class CadastrarNoteController {
         return null;
     }
 
-    public List<Notepad> deletaNoteNoBancoDeDadosSemInterface(Notepad notepad) {
-        AsyncTaskDeleteSemInterface asyncTaskDeleteSemInterface = new AsyncTaskDeleteSemInterface(notepad);
+    public List<Notepad> deletaNoteNoBancoDeDadosSemInterface(List<Notepad> notepadList) {
+        AsyncTaskDeleteSemInterface asyncTaskDeleteSemInterface = new AsyncTaskDeleteSemInterface(notepadList);
         asyncTaskDeleteSemInterface.execute();
         return null;
     }

@@ -25,8 +25,6 @@ import android.widget.Toast;
 import com.example.notepad.R;
 import com.example.notepad.controller.CadastrarNoteController;
 import com.example.notepad.controller.MainActivityController;
-import com.example.notepad.database.asynctask.AsyncTaskDeleteSemInterface;
-import com.example.notepad.database.asynctask.cominterface.AsyncTaskDelete;
 import com.example.notepad.database.asynctask.cominterface.AsyncTaskGet;
 import com.example.notepad.model.Notepad;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -125,6 +123,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 notepadList.remove(viewHolder.getAdapterPosition());
+                cadastrarNoteController.deletaNoteNoBancoDeDadosSemInterface(notepadList);
                 recyclerAdapter.notifyDataSetChanged();
             }
         }).attachToRecyclerView(recyclerView);

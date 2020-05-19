@@ -1,4 +1,4 @@
-package com.example.notepad.database.asynctask;
+package com.example.notepad.database.asynctask.seminterface;
 
 import android.os.AsyncTask;
 

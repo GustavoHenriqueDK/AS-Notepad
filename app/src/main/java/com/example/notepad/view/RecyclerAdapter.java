@@ -1,6 +1,7 @@
 package com.example.notepad.view;
 
 import android.content.Context;
+import android.net.wifi.p2p.WifiP2pManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ListaV
 
     private static List<Notepad> listaDeNotas;
     private Context context;
+    CadastrarNoteController cadastrarNoteController = new CadastrarNoteController();
+
 
     public void setNotes(List<Notepad> listaDeNotas) {
         this.listaDeNotas = listaDeNotas;

@@ -4,7 +4,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 
 import com.example.notepad.database.dao.ConsultasDAO;
-import com.example.notepad.database.dao.mRoomDatabase;
+import com.example.notepad.database.mRoomDatabase;
 import com.example.notepad.model.Notepad;
 
 public class AsyncTaskUpdate extends AsyncTask<Void, Integer, Void> {
