@@ -11,10 +11,10 @@ import com.example.notepad.model.Notepad;
 
 public class AsyncTaskSave extends AsyncTask<Void, Integer, Void> {
 
-    public ConsultasDAO consultasDAO;
-    public Notepad notepad;
-    public QuandoSalvarListener quandoSalvarListener;
-    Context context;
+    private ConsultasDAO consultasDAO;
+    private Notepad notepad;
+    private QuandoSalvarListener quandoSalvarListener;
+    private Context context;
 
     public AsyncTaskSave(Notepad notepad, QuandoSalvarListener quandoSalvarListener) {
         this.notepad = notepad;

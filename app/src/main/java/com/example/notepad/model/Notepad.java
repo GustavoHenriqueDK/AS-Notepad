@@ -5,7 +5,7 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "table_cliente")
+@Entity(tableName = "table_notepad")
 public class Notepad {
 
     public String anotacaoRealizada;

@@ -9,9 +9,9 @@ import java.util.List;
 
 public class  AsyncTaskGet extends AsyncTask<Void, Integer, List<Notepad>> {
 
-    public ConsultasDAO consultasDAO;
-    public QuandoBuscarNotes quandoBuscarNotes;
-    public Notepad notepad;
+    private ConsultasDAO consultasDAO;
+    private QuandoBuscarNotes quandoBuscarNotes;
+    private Notepad notepad;
 
     public AsyncTaskGet(ConsultasDAO consultasDAO, QuandoBuscarNotes quandoBuscarNotes) {
         this.consultasDAO = consultasDAO;

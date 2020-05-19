@@ -11,10 +11,10 @@ import java.util.List;
 
 public class AsyncTaskDelete extends AsyncTask<Void, Integer, Void> {
 
-    public ConsultasDAO consultasDAO;
-    public Notepad notepad;
-    public QuandoDeletarListener quandoDeletarListener;
-    Context context;
+    private ConsultasDAO consultasDAO;
+    private Notepad notepad;
+    private QuandoDeletarListener quandoDeletarListener;
+    private Context context;
 
     public AsyncTaskDelete(Notepad notepad, QuandoDeletarListener quandoDeletarListener) {
         this.notepad = notepad;

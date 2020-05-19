@@ -31,7 +31,7 @@ public abstract class mRoomDatabase extends androidx.room.RoomDatabase {
             synchronized (mRoomDatabase.class) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                            mRoomDatabase.class, "cliente_database")
+                            mRoomDatabase.class, "notepad_database")
                             .addCallback(sRoomDatabaseCallback)
                             .build();
                 }

@@ -9,10 +9,10 @@ import com.example.notepad.model.Notepad;
 
 public class AsyncTaskUpdate extends AsyncTask<Void, Integer, Void> {
 
-    public ConsultasDAO consultasDAO;
-    public Notepad notepad;
-    public QuandoAlterarListener quandoAlterarListener;
-    Context context;
+    private ConsultasDAO consultasDAO;
+    private Notepad notepad;
+    private QuandoAlterarListener quandoAlterarListener;
+    private Context context;
 
     public AsyncTaskUpdate(Notepad notepad, QuandoAlterarListener quandoAlterarListener) {
         this.notepad = notepad;
