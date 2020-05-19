@@ -4,6 +4,8 @@ import android.content.Context;
 import android.widget.EditText;
 import android.widget.Switch;
 
+import com.example.notepad.database.asynctask.AsyncTaskDeleteSemInterface;
+import com.example.notepad.database.asynctask.AsyncTaskGetSemInterface;
 import com.example.notepad.database.asynctask.cominterface.AsyncTaskDelete;
 import com.example.notepad.database.asynctask.cominterface.AsyncTaskGet;
 import com.example.notepad.database.asynctask.cominterface.AsyncTaskSave;
@@ -21,7 +23,7 @@ public class CadastrarNoteController {
     private Context context;
     private ConsultasDAO consultasDAO;
 
-    public CadastrarNoteController (Context context) {
+    public CadastrarNoteController(Context context) {
         mRoomDatabase roomDatabase = mRoomDatabase.getDatabase(context);
         consultasDAO = roomDatabase.consultasDAO();
     }
@@ -89,9 +91,15 @@ public class CadastrarNoteController {
     }
 
     //Métodos database sem interface;
-    public List<Notepad> pegaNoteNoBancoDeDadosSemInterface(AsyncTaskGet.QuandoBuscarNotes quandoBuscarNotes) {
-        AsyncTaskGet asyncTaskGet = new AsyncTaskGet(consultasDAO, quandoBuscarNotes);
-        asyncTaskGet.execute();
+    public List<Notepad> pegaNoteNoBancoDeDadosSemInterface() {
+        AsyncTaskGetSemInterface asyncTaskGetSemInterface = new AsyncTaskGetSemInterface(consultasDAO);
+        asyncTaskGetSemInterface.execute();
+        return null;
+    }
+
+    public List<Notepad> deletaNoteNoBancoDeDadosSemInterface(Notepad notepad) {
+        AsyncTaskDeleteSemInterface asyncTaskDeleteSemInterface = new AsyncTaskDeleteSemInterface(notepad);
+        asyncTaskDeleteSemInterface.execute();
         return null;
     }
 

@@ -25,6 +25,8 @@ import android.widget.Toast;
 import com.example.notepad.R;
 import com.example.notepad.controller.CadastrarNoteController;
 import com.example.notepad.controller.MainActivityController;
+import com.example.notepad.database.asynctask.AsyncTaskDeleteSemInterface;
+import com.example.notepad.database.asynctask.cominterface.AsyncTaskDelete;
 import com.example.notepad.database.asynctask.cominterface.AsyncTaskGet;
 import com.example.notepad.model.Notepad;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -55,9 +57,11 @@ public class MainActivity extends AppCompatActivity {
 
         context = MainActivity.this;
         cadastrarNoteController = new CadastrarNoteController(context);
+        notepadList = cadastrarNoteController.pegaNoteNoBancoDeDadosSemInterface();
 
         setaAdapterRecyclerView();
         floatingActionButtonCadastrarNote();
+        setaSwipeDeDeletar(recyclerAdapter, recyclerView);
 
     }
 
@@ -111,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void setaSwipeDeDeletar(final List<Notepad> notePad, final RecyclerAdapter recyclerAdapter, RecyclerView recyclerView) {
+    private void setaSwipeDeDeletar(final RecyclerAdapter recyclerAdapter, RecyclerView recyclerView) {
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT) {
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
@@ -120,13 +124,9 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                notePad.remove(viewHolder.getAdapterPosition());
+                notepadList.remove(viewHolder.getAdapterPosition());
                 recyclerAdapter.notifyDataSetChanged();
-
-           //     verificaSeListaEstaVazia();
-
             }
-            //Método que adapta a lista após ser modificada.
         }).attachToRecyclerView(recyclerView);
     }
 
@@ -175,7 +175,7 @@ public class MainActivity extends AppCompatActivity {
                                         recyclerView.getRecycledViewPool().clear();
                                         recyclerAdapter.notifyDataSetChanged();
 
-                                     //   verificaSeListaEstaVazia();
+                                        //   verificaSeListaEstaVazia();
 
                                     }
                                 })
@@ -192,7 +192,7 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                     recyclerAdapter.notifyDataSetChanged();
-                  //  verificaSeListaEstaVazia();
+                    //  verificaSeListaEstaVazia();
                 } else {
                     Toast.makeText(context, "Tudo limpo!", Toast.LENGTH_SHORT).show();
                 }
