@@ -25,6 +25,7 @@ import android.widget.Toast;
 import com.example.notepad.R;
 import com.example.notepad.controller.CadastrarNoteController;
 import com.example.notepad.controller.MainActivityController;
+import com.example.notepad.database.asynctask.cominterface.AsyncTaskDelete;
 import com.example.notepad.database.asynctask.cominterface.AsyncTaskGet;
 import com.example.notepad.model.Notepad;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -58,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
 
         setaAdapterRecyclerView();
         floatingActionButtonCadastrarNote();
-        setaSwipeDeDeletar(recyclerAdapter, recyclerView);
+        setaSwipeDeDeletar();
 
     }
 
@@ -87,12 +88,12 @@ public class MainActivity extends AppCompatActivity {
         recyclerAdapter = new RecyclerAdapter(notepadList, context);
         recyclerView = findViewById(R.id.recyclerView);
 
-        //setaSwipeDeDeletar(cadastrarNoteController.getListaDeNotes(), recyclerAdapter, recyclerView);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
 
         recyclerAdapter.notifyDataSetChanged();
         recyclerView.setAdapter(recyclerAdapter);
+        setaSwipeDeDeletar();
     }
 
     @Override
@@ -112,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void setaSwipeDeDeletar(final RecyclerAdapter recyclerAdapter, RecyclerView recyclerView) {
+    private void setaSwipeDeDeletar() {
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT) {
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
@@ -121,9 +122,17 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                notepadList.remove(viewHolder.getAdapterPosition());
-                cadastrarNoteController.deletaNoteNoBancoDeDadosSemInterface(notepadList);
+                Notepad notepad;
+                notepad = notepadList.remove(viewHolder.getAdapterPosition());
+
+                cadastrarNoteController.deletaNoteNoBancoDeDados(notepad, new AsyncTaskDelete.QuandoDeletarListener() {
+                    @Override
+                    public void quandoDeletar() {
+                        Toast.makeText(context, "deletou", Toast.LENGTH_SHORT).show();
+                    }
+                });
                 recyclerAdapter.notifyDataSetChanged();
+                recyclerView.setAdapter(recyclerAdapter);
             }
         }).attachToRecyclerView(recyclerView);
     }

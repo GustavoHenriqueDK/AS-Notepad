@@ -7,6 +7,8 @@ import com.example.notepad.database.dao.ConsultasDAO;
 import com.example.notepad.database.mRoomDatabase;
 import com.example.notepad.model.Notepad;
 
+import java.util.List;
+
 public class AsyncTaskDelete extends AsyncTask<Void, Integer, Void> {
 
     private ConsultasDAO consultasDAO;
