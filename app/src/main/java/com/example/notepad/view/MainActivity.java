@@ -55,7 +55,6 @@ public class MainActivity extends AppCompatActivity {
 
         context = MainActivity.this;
         cadastrarNoteController = new CadastrarNoteController(context);
-        notepadList = cadastrarNoteController.pegaNoteNoBancoDeDadosSemInterface();
 
         setaAdapterRecyclerView();
         floatingActionButtonCadastrarNote();

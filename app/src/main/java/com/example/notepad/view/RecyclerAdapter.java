@@ -21,7 +21,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ListaV
 
     private static List<Notepad> listaDeNotas;
     private Context context;
-    CadastrarNoteController cadastrarNoteController = new CadastrarNoteController();
 
 
     public void setNotes(List<Notepad> listaDeNotas) {
