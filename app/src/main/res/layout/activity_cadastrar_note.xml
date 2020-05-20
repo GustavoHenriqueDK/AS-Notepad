@@ -10,14 +10,14 @@
         android:id="@+id/TextInputAddNote"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="350dp"
-        android:layout_height="400dp"
+        android:layout_height="500dp"
         android:visibility="visible"
         app:errorEnabled="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.558">
+        app:layout_constraintVertical_bias="0.971">
 
         <EditText
             android:id="@+id/editTextAddNote"
@@ -37,20 +37,6 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/buttonCadastrar"
-        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:text="SALVAR"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
-        app:backgroundTint="@color/colorPrimary"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.939" />
-
     <Switch
         android:id="@+id/switchSairAutomaticamente"
         android:layout_width="wrap_content"
@@ -62,10 +48,10 @@
         android:trackTint="@color/colorPrimary"
         app:layout_constraintBottom_toTopOf="@+id/TextInputAddNote"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.093"
+        app:layout_constraintHorizontal_bias="0.09"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.26" />
+        app:layout_constraintVertical_bias="0.302" />
 
     <Switch
         android:id="@+id/switchLimparCampo"
@@ -78,10 +64,10 @@
         android:trackTint="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.098"
+        app:layout_constraintHorizontal_bias="0.089"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.123" />
+        app:layout_constraintVertical_bias="0.135" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

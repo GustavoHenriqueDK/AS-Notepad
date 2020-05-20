@@ -7,6 +7,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -35,25 +37,6 @@ public class CadastrarNoteActivity extends AppCompatActivity {
 
         context = CadastrarNoteActivity.this;
         cadastrarNoteController = new CadastrarNoteController(context);
-
-        cliqueDoBotaoDeSalvar();
-
-    }
-
-    private void cliqueDoBotaoDeSalvar() {
-        Button button = findViewById(R.id.buttonCadastrar);
-
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (cadastrarNoteController.editTextNaoEstaVazio(editText)) {
-                    salvaTextoNoBancoDeDados();
-                    Toast.makeText(CadastrarNoteActivity.this, "Nota salva", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(CadastrarNoteActivity.this, "O campo não pode estar vazio", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
     }
 
     private void salvaTextoNoBancoDeDados() {
@@ -103,7 +86,6 @@ public class CadastrarNoteActivity extends AppCompatActivity {
         } else {
             finish();
         }
-
     }
 
     private void findViews() {
@@ -112,7 +94,24 @@ public class CadastrarNoteActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.salvarNote:
+                if (cadastrarNoteController.editTextNaoEstaVazio(editText)) {
+                    salvaTextoNoBancoDeDados();
+                    Toast.makeText(CadastrarNoteActivity.this, "Nota salva", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(CadastrarNoteActivity.this, "O campo não pode estar vazio", Toast.LENGTH_SHORT).show();
+                }
+                break;
+        }
         defineAlertDialogDeEditText();
+        return true;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.onoptions_menu_cadastro, menu);
         return true;
     }
 
