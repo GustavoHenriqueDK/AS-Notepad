@@ -42,39 +42,39 @@ public class CadastrarNoteActivity extends AppCompatActivity {
 
     private void cliqueDoBotaoDeSalvar() {
         Button button = findViewById(R.id.buttonCadastrar);
-        final Switch mSwitchSair = findViewById(R.id.switchSairAutomaticamente);
-        final Switch mSwitchLimparCampo = findViewById(R.id.switchLimparCampo);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (cadastrarNoteController.editTextNaoEstaVazio(editText)) {
-
-                    //TODO: SALVAR OPÇÃO DO SWITCH NO DB
-                    //TODO: SEPARAR RESPONSABILIDADES
-
-                    CadastrarNoteController cadastrarNoteControllerDataBase = new CadastrarNoteController(context);
-
-                    Notepad notepad = new Notepad();
-                    notepad.setAnotacaoRealizada(editText.getText().toString());
-
-                    cadastrarNoteControllerDataBase.adicionarNoteNoBancoDeDados(notepad, new AsyncTaskSave.QuandoSalvarListener() {
-                        @Override
-                        public void quandoSalvar() {
-
-                            Toast.makeText(CadastrarNoteActivity.this, "Nota salva", Toast.LENGTH_SHORT).show();
-
-                            if (cadastrarNoteControllerDataBase.switchDeSaiDaTelarPressionado(mSwitchSair)) {
-                                finish();
-                            }
-
-                            if (cadastrarNoteControllerDataBase.switchDeLimparCampoPressionado(mSwitchLimparCampo)) {
-                                editText.setText("");
-                            }
-                        }
-                    });
+                    salvaTextoNoBancoDeDados();
+                    Toast.makeText(CadastrarNoteActivity.this, "Nota salva", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(CadastrarNoteActivity.this, "O campo não pode estar vazio", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+    private void salvaTextoNoBancoDeDados() {
+        //TODO: SALVAR OPÇÃO DO SWITCH
+
+        final Switch mSwitchSair = findViewById(R.id.switchSairAutomaticamente);
+        final Switch mSwitchLimparCampo = findViewById(R.id.switchLimparCampo);
+
+        CadastrarNoteController cadastrarNoteControllerDataBase = new CadastrarNoteController(context);
+
+        Notepad notepad = new Notepad();
+        notepad.setAnotacaoRealizada(editText.getText().toString());
+
+        cadastrarNoteControllerDataBase.adicionarNoteNoBancoDeDados(notepad, new AsyncTaskSave.QuandoSalvarListener() {
+            @Override
+            public void quandoSalvar() {
+                if (cadastrarNoteControllerDataBase.switchDeSaiDaTelarPressionado(mSwitchSair)) {
+                    finish();
+                }
+                if (cadastrarNoteControllerDataBase.switchDeLimparCampoPressionado(mSwitchLimparCampo)) {
+                    editText.setText("");
                 }
             }
         });

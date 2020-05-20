@@ -62,7 +62,7 @@ public class CadastrarNoteController {
     }
 
     public boolean listaEstaVazia() {
-        if (listaDeNotes.isEmpty()) {
+        if (pegaNoteNoBancoDeDadosSemInterface().isEmpty()) {
             return true;
         }
         return false;
@@ -107,6 +107,4 @@ public class CadastrarNoteController {
         asyncTaskDeleteSemInterface.execute();
         return null;
     }
-
-
 }

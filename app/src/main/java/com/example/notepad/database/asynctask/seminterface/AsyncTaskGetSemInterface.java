@@ -10,7 +10,6 @@ import java.util.List;
 public class  AsyncTaskGetSemInterface extends AsyncTask<Void, Integer, List<Notepad>> {
 
     private ConsultasDAO consultasDAO;
-    private Notepad notepad;
 
     public AsyncTaskGetSemInterface(ConsultasDAO consultasDAO) {
         this.consultasDAO = consultasDAO;

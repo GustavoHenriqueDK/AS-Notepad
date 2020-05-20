@@ -60,13 +60,12 @@ public class MainActivity extends AppCompatActivity {
         setaAdapterRecyclerView();
         floatingActionButtonCadastrarNote();
         setaSwipeDeDeletar();
+        //verificaSeListaEstaVazia();
 
     }
 
+    //TODO
     private void verificaSeListaEstaVazia() {
-
-        MainActivityController mainActivityController = new MainActivityController();
-
         if (cadastrarNoteController.listaEstaVazia()) {
             constraintLayoutLista.setVisibility(View.GONE);
             constraintLayoutTextView.setVisibility(View.VISIBLE);
@@ -157,21 +156,20 @@ public class MainActivity extends AppCompatActivity {
         imageView = findViewById(R.id.imageView);
     }
 
+    //TODO
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.limparTudo:
-
-                if (cadastrarNoteController.getListaDeNotes().size() >= 1) {
-
-                    if (cadastrarNoteController.getListaDeNotes().size() > 10) {
+                if (cadastrarNoteController.pegaNoteNoBancoDeDadosSemInterface().size() >= 1) {
+                    if (cadastrarNoteController.pegaNoteNoBancoDeDadosSemInterface().size() >= 10) {
 
                         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                         builder.setMessage(R.string.alertDialogMensagemExcluir)
                                 .setPositiveButton(R.string.alertDialogSim, new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int id) {
 
-                                        cadastrarNoteController.getListaDeNotes().clear();
+                                        cadastrarNoteController.pegaNoteNoBancoDeDadosSemInterface().clear();
 
                                         recyclerView.getRecycledViewPool().clear();
                                         recyclerAdapter.notifyDataSetChanged();
@@ -191,16 +189,12 @@ public class MainActivity extends AppCompatActivity {
                     } else {
                         cadastrarNoteController.getListaDeNotes().clear();
                     }
-
                     recyclerAdapter.notifyDataSetChanged();
                     //  verificaSeListaEstaVazia();
                 } else {
                     Toast.makeText(context, "Tudo limpo!", Toast.LENGTH_SHORT).show();
                 }
-                break;
         }
         return super.onOptionsItemSelected(item);
     }
-
-
 }
