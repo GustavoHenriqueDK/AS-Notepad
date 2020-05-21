@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.example.notepad.R;
 import com.example.notepad.controller.CadastrarNoteController;
 import com.example.notepad.database.asynctask.cominterface.AsyncTaskSave;
+import com.example.notepad.database.asynctask.cominterface.AsyncTaskUpdate;
 import com.example.notepad.model.Notepad;
 import com.example.notepad.model.NotepadActivityConstantes;
 
@@ -41,13 +42,15 @@ public class CadastrarNoteActivity extends AppCompatActivity implements NotepadA
         cadastrarNoteController = new CadastrarNoteController(context);
     }
 
-    private void salvaTextoNoBancoDeDados(Notepad notepad) {
+    private void salvaTextoNoBancoDeDados() {
         //TODO: SALVAR OPÇÃO DO SWITCH NO SHAREDPREFERENCES
 
         final Switch mSwitchSair = findViewById(R.id.switchSairAutomaticamente);
         final Switch mSwitchLimparCampo = findViewById(R.id.switchLimparCampo);
 
         CadastrarNoteController cadastrarNoteControllerDataBase = new CadastrarNoteController(context);
+
+        Notepad notepad = new Notepad();
 
         notepad.setAnotacaoRealizada(editText.getText().toString());
 
@@ -63,20 +66,6 @@ public class CadastrarNoteActivity extends AppCompatActivity implements NotepadA
                 }
             }
         });
-    }
-
-    private Notepad setaInformacoesDoNotepad(@Nullable Notepad notepad) {
-        if (notepad != null) {
-            notepad.setAnotacaoRealizada(editText.getText().toString());
-        }
-        return notepad;
-    }
-
-    private void setaInformacoesDoEditText(Notepad notepadEditado) {
-        editText.setText(notepadEditado.getAnotacaoRealizada());
-    }
-
-    private void defineUIDeEdicao() {
     }
 
     private void defineAlertDialogDeEditText() {
@@ -112,9 +101,8 @@ public class CadastrarNoteActivity extends AppCompatActivity implements NotepadA
         switch (item.getItemId()) {
             case R.id.salvarNote:
                 if (cadastrarNoteController.editTextNaoEstaVazio(editText)) {
-                    Notepad notepad = new Notepad();
 
-                    salvaTextoNoBancoDeDados(notepad);
+                    salvaTextoNoBancoDeDados();
                     Toast.makeText(CadastrarNoteActivity.this, "Nota salva", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(CadastrarNoteActivity.this, "O campo não pode estar vazio", Toast.LENGTH_SHORT).show();

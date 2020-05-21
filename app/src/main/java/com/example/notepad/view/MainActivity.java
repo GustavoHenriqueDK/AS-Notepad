@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements NotepadActivityCo
 
     //TODO
     private void verificaSeListaEstaVazia() {
-        if (cadastrarNoteController.listaEstaVazia()) {
+        if (cadastrarNoteController.pegaNoteNoBancoDeDadosSemInterface().isEmpty()) {
             constraintLayoutLista.setVisibility(View.GONE);
             constraintLayoutTextView.setVisibility(View.VISIBLE);
             iniciaAnimacaoDosComponentes();
@@ -89,17 +89,10 @@ public class MainActivity extends AppCompatActivity implements NotepadActivityCo
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
 
-        recyclerAdapter = new RecyclerAdapter(notepadList, context, new RecyclerAdapter.OnClickListener() {
-            @Override
-            public void onClick(int position) {
-                Intent intent = new Intent(MainActivity.this, CadastrarNoteActivity.class);
-                intent.putExtra(INTENT_EXTRA_NOTEPAD, position);
-                startActivity(intent);
-            }
-        });
+        recyclerAdapter = new RecyclerAdapter(notepadList, context);
 
-        recyclerAdapter.notifyDataSetChanged();
         recyclerView.setAdapter(recyclerAdapter);
+        recyclerAdapter.notifyDataSetChanged();
         setaSwipeDeDeletar();
     }
 
