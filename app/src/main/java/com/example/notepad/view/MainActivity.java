@@ -28,12 +28,13 @@ import com.example.notepad.controller.CadastrarNoteController;
 import com.example.notepad.controller.MainActivityController;
 import com.example.notepad.database.asynctask.cominterface.AsyncTaskGet;
 import com.example.notepad.model.Notepad;
+import com.example.notepad.model.NotepadActivityConstantes;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NotepadActivityConstantes {
 
     private Context context;
     private RecyclerView recyclerView;
@@ -60,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
         setaAdapterRecyclerView();
         floatingActionButtonCadastrarNote();
         setaSwipeDeDeletar();
-        cliqueDoItemDaLista();
         //verificaSeListaEstaVazia();
 
     }
@@ -78,16 +78,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void cliqueDoItemDaLista() {
-        recyclerAdapter.setOnClickListener(new RecyclerAdapter.OnClickListener() {
-            @Override
-            public void onClick(int position) {
-                Intent intent = new Intent(MainActivity.this, CadastrarNoteActivity.class);
-                startActivity(intent);
-            }
-        });
-    }
-
     private void iniciaAnimacaoDosComponentes() {
         Animation animation = AnimationUtils.loadAnimation(MainActivity.this, R.anim.fadein_animation);
         textView.startAnimation(animation);
@@ -95,10 +85,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setaAdapterRecyclerView() {
-        recyclerAdapter = new RecyclerAdapter(notepadList, context);
-        recyclerView = findViewById(R.id.recyclerView);
 
+        recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+
+        recyclerAdapter = new RecyclerAdapter(notepadList, context, new RecyclerAdapter.OnClickListener() {
+            @Override
+            public void onClick(int position) {
+                Intent intent = new Intent(MainActivity.this, CadastrarNoteActivity.class);
+                intent.putExtra(INTENT_EXTRA_NOTEPAD, position);
+                startActivity(intent);
+            }
+        });
 
         recyclerAdapter.notifyDataSetChanged();
         recyclerView.setAdapter(recyclerAdapter);

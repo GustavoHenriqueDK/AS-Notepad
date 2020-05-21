@@ -1,6 +1,7 @@
 package com.example.notepad.view;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
@@ -62,6 +63,20 @@ public class CadastrarNoteActivity extends AppCompatActivity implements NotepadA
                 }
             }
         });
+    }
+
+    private Notepad setaInformacoesDoNotepad(@Nullable Notepad notepad) {
+        if (notepad != null) {
+            notepad.setAnotacaoRealizada(editText.getText().toString());
+        }
+        return notepad;
+    }
+
+    private void setaInformacoesDoEditText(Notepad notepadEditado) {
+        editText.setText(notepadEditado.getAnotacaoRealizada());
+    }
+
+    private void defineUIDeEdicao() {
     }
 
     private void defineAlertDialogDeEditText() {

@@ -32,9 +32,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ListaV
         this.listaDeNotas = listaDeNotas;
     }
 
-    public RecyclerAdapter(List<Notepad> listaDeNotas, Context context) {
+    public RecyclerAdapter(List<Notepad> listaDeNotas, Context context, OnClickListener onClickListener) {
         this.listaDeNotas = listaDeNotas;
         this.context = context;
+        this.onClickListener = onClickListener;
     }
 
     @NonNull
