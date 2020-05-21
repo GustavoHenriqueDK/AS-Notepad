@@ -40,7 +40,7 @@ public class CadastrarNoteActivity extends AppCompatActivity implements NotepadA
         cadastrarNoteController = new CadastrarNoteController(context);
     }
 
-    private void salvaTextoNoBancoDeDados() {
+    private void salvaTextoNoBancoDeDados(Notepad notepad) {
         //TODO: SALVAR OPÇÃO DO SWITCH NO SHAREDPREFERENCES
 
         final Switch mSwitchSair = findViewById(R.id.switchSairAutomaticamente);
@@ -48,7 +48,6 @@ public class CadastrarNoteActivity extends AppCompatActivity implements NotepadA
 
         CadastrarNoteController cadastrarNoteControllerDataBase = new CadastrarNoteController(context);
 
-        Notepad notepad = new Notepad();
         notepad.setAnotacaoRealizada(editText.getText().toString());
 
         cadastrarNoteControllerDataBase.adicionarNoteNoBancoDeDados(notepad, new AsyncTaskSave.QuandoSalvarListener() {
@@ -89,24 +88,6 @@ public class CadastrarNoteActivity extends AppCompatActivity implements NotepadA
         }
     }
 
-    private void setaInformacaoDoNotepad(Notepad notepad) {
-        if (notepad != null) {
-            notepad.setAnotacaoRealizada(editText.getText().toString());
-        }
-    }
-
-    private void setaInformacaDoEditText(Notepad notepad) {
-        editText.setText(notepad.getAnotacaoRealizada());
-    }
-
-    private void defineUIDeEdicao() {
-
-        Intent intent = getIntent();
-        Notepad notepad = null;
-
-        if (intent.hasExtra())
-    }
-
     private void findViews() {
         editText = findViewById(R.id.editTextAddNote);
     }
@@ -116,7 +97,9 @@ public class CadastrarNoteActivity extends AppCompatActivity implements NotepadA
         switch (item.getItemId()) {
             case R.id.salvarNote:
                 if (cadastrarNoteController.editTextNaoEstaVazio(editText)) {
-                    salvaTextoNoBancoDeDados();
+                    Notepad notepad = new Notepad();
+
+                    salvaTextoNoBancoDeDados(notepad);
                     Toast.makeText(CadastrarNoteActivity.this, "Nota salva", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(CadastrarNoteActivity.this, "O campo não pode estar vazio", Toast.LENGTH_SHORT).show();
