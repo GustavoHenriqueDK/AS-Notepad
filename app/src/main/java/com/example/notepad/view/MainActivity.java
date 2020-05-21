@@ -12,6 +12,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -59,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
         setaAdapterRecyclerView();
         floatingActionButtonCadastrarNote();
         setaSwipeDeDeletar();
+        cliqueDoItemDaLista();
         //verificaSeListaEstaVazia();
 
     }
@@ -74,6 +76,16 @@ public class MainActivity extends AppCompatActivity {
             constraintLayoutLista.setVisibility(View.VISIBLE);
             constraintLayoutTextView.setVisibility(View.GONE);
         }
+    }
+
+    private void cliqueDoItemDaLista() {
+        recyclerAdapter.setOnClickListener(new RecyclerAdapter.OnClickListener() {
+            @Override
+            public void onClick(int position) {
+                Intent intent = new Intent(MainActivity.this, CadastrarNoteActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void iniciaAnimacaoDosComponentes() {
@@ -106,6 +118,8 @@ public class MainActivity extends AppCompatActivity {
                 recyclerAdapter.setNotes(notepadList);
 
                 recyclerAdapter.notifyDataSetChanged();
+
+
             }
         });
     }
@@ -172,9 +186,7 @@ public class MainActivity extends AppCompatActivity {
 
                                         recyclerView.getRecycledViewPool().clear();
                                         recyclerAdapter.notifyDataSetChanged();
-
                                         //   verificaSeListaEstaVazia();
-
                                     }
                                 })
                                 .setNegativeButton(R.string.alertDialogNao, new DialogInterface.OnClickListener() {

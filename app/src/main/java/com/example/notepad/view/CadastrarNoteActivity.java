@@ -6,12 +6,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.Toast;
@@ -20,8 +21,9 @@ import com.example.notepad.R;
 import com.example.notepad.controller.CadastrarNoteController;
 import com.example.notepad.database.asynctask.cominterface.AsyncTaskSave;
 import com.example.notepad.model.Notepad;
+import com.example.notepad.model.NotepadActivityConstantes;
 
-public class CadastrarNoteActivity extends AppCompatActivity {
+public class CadastrarNoteActivity extends AppCompatActivity implements NotepadActivityConstantes {
 
     private EditText editText;
     private Context context;
@@ -31,7 +33,6 @@ public class CadastrarNoteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastrar_note);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle("Insira uma anotação!");
         findViews();
 
@@ -40,7 +41,7 @@ public class CadastrarNoteActivity extends AppCompatActivity {
     }
 
     private void salvaTextoNoBancoDeDados() {
-        //TODO: SALVAR OPÇÃO DO SWITCH
+        //TODO: SALVAR OPÇÃO DO SWITCH NO SHAREDPREFERENCES
 
         final Switch mSwitchSair = findViewById(R.id.switchSairAutomaticamente);
         final Switch mSwitchLimparCampo = findViewById(R.id.switchLimparCampo);
@@ -53,9 +54,10 @@ public class CadastrarNoteActivity extends AppCompatActivity {
         cadastrarNoteControllerDataBase.adicionarNoteNoBancoDeDados(notepad, new AsyncTaskSave.QuandoSalvarListener() {
             @Override
             public void quandoSalvar() {
-                if (cadastrarNoteControllerDataBase.switchDeSaiDaTelarPressionado(mSwitchSair)) {
+                if (cadastrarNoteControllerDataBase.switchDeSairDaTelaPressionado(mSwitchSair)) {
                     finish();
                 }
+
                 if (cadastrarNoteControllerDataBase.switchDeLimparCampoPressionado(mSwitchLimparCampo)) {
                     editText.setText("");
                 }
@@ -80,12 +82,29 @@ public class CadastrarNoteActivity extends AppCompatActivity {
                             dialog.cancel();
                         }
                     });
-
             AlertDialog alert11 = builder.create();
             alert11.show();
         } else {
             finish();
         }
+    }
+
+    private void setaInformacaoDoNotepad(Notepad notepad) {
+        if (notepad != null) {
+            notepad.setAnotacaoRealizada(editText.getText().toString());
+        }
+    }
+
+    private void setaInformacaDoEditText(Notepad notepad) {
+        editText.setText(notepad.getAnotacaoRealizada());
+    }
+
+    private void defineUIDeEdicao() {
+
+        Intent intent = getIntent();
+        Notepad notepad = null;
+
+        if (intent.hasExtra())
     }
 
     private void findViews() {
@@ -104,7 +123,6 @@ public class CadastrarNoteActivity extends AppCompatActivity {
                 }
                 break;
         }
-        defineAlertDialogDeEditText();
         return true;
     }
 

@@ -47,7 +47,7 @@ public class CadastrarNoteController {
         return true;
     }
 
-    public boolean switchDeSaiDaTelarPressionado(Switch mSwitch) {
+    public boolean switchDeSairDaTelaPressionado(Switch mSwitch) {
         if (mSwitch.isChecked()) {
             return true;
         }

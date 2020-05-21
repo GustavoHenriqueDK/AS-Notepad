@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.notepad.R;
@@ -21,7 +22,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ListaV
 
     private static List<Notepad> listaDeNotas;
     private Context context;
+    private OnClickListener onClickListener;
 
+    public void setOnClickListener(OnClickListener onClickListener) {
+        this.onClickListener = onClickListener;
+    }
 
     public void setNotes(List<Notepad> listaDeNotas) {
         this.listaDeNotas = listaDeNotas;
@@ -42,6 +47,14 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ListaV
     @Override
     public void onBindViewHolder(@NonNull ListaViewHolder holder, int position) {
         holder.textNote.setText(listaDeNotas.get(position).getAnotacaoRealizada());
+        holder.constraintLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (onClickListener != null) {
+                    onClickListener.onClick(position);
+                }
+            }
+        });
     }
 
     @Override
@@ -52,10 +65,16 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ListaV
     static class ListaViewHolder extends RecyclerView.ViewHolder {
 
         private TextView textNote;
+        private ConstraintLayout constraintLayout;
 
         public ListaViewHolder(@NonNull final View itemView) {
             super(itemView);
             textNote = itemView.findViewById(R.id.textView);
+            constraintLayout = itemView.findViewById(R.id.constraintLayout);
         }
+    }
+
+    public interface OnClickListener {
+        void onClick(int position);
     }
 }
