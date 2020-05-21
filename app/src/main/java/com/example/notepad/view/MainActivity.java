@@ -145,13 +145,6 @@ public class MainActivity extends AppCompatActivity implements NotepadActivityCo
         });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.onoptions_menu_lista, menu);
-        return true;
-    }
-
     private void findViews() {
         constraintLayoutLista = findViewById(R.id.ConstraintLayoutLista);
         constraintLayoutTextView = findViewById(R.id.ConstraintLayoutText);
@@ -160,43 +153,4 @@ public class MainActivity extends AppCompatActivity implements NotepadActivityCo
         imageView = findViewById(R.id.imageView);
     }
 
-    //TODO
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.limparTudo:
-                if (cadastrarNoteController.pegaNoteNoBancoDeDadosSemInterface().size() >= 1) {
-                    if (cadastrarNoteController.pegaNoteNoBancoDeDadosSemInterface().size() >= 10) {
-
-                        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                        builder.setMessage(R.string.alertDialogMensagemExcluir)
-                                .setPositiveButton(R.string.alertDialogSim, new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int id) {
-
-                                        cadastrarNoteController.pegaNoteNoBancoDeDadosSemInterface().clear();
-
-                                        recyclerView.getRecycledViewPool().clear();
-                                        recyclerAdapter.notifyDataSetChanged();
-                                        //   verificaSeListaEstaVazia();
-                                    }
-                                })
-                                .setNegativeButton(R.string.alertDialogNao, new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int id) {
-                                        dialog.cancel();
-                                    }
-                                });
-
-                        AlertDialog alert11 = builder.create();
-                        alert11.show();
-                    } else {
-                        cadastrarNoteController.getListaDeNotes().clear();
-                    }
-                    recyclerAdapter.notifyDataSetChanged();
-                    //  verificaSeListaEstaVazia();
-                } else {
-                    Toast.makeText(context, "Tudo limpo!", Toast.LENGTH_SHORT).show();
-                }
-        }
-        return super.onOptionsItemSelected(item);
-    }
 }
